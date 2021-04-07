@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CsharpDataStructures
+namespace DotnetcoreDataStructures
 {
     // Time complexity - Big O notation
     // https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/
