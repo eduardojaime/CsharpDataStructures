@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DotnetcoreDataStructures.Graph
 {
@@ -129,7 +128,6 @@ namespace DotnetcoreDataStructures.Graph
         /// Following a path from the beginning vertex until it reaches the last.
         /// Then backtracking and following the next path until it reaches the last vertex.
         /// Until there are no more paths left.
-
         /// Steps
         /// 1) Pick starting point, visit and push to stack
         /// 2) Get next unvisited, visit and push to stack
@@ -141,23 +139,21 @@ namespace DotnetcoreDataStructures.Graph
         public void DepthFirstSearch(int startVertex)
         {
             Vertex<T> currVert = vertices[startVertex];
-            currVert.isVisited = true;
-            // print value? maybe make a method called Visit which sets isvisited to true and prints label
+            currVert.VisitVertex(); // visit and print value
             dfsStack.Push(startVertex);
 
-            int nextIndex;
+            int adjIndex;
             while (dfsStack.Count > 0)
             {
-                nextIndex = GetNextUnvisitedAdjacentNode(dfsStack.Peek());
+                adjIndex = GetNextUnvisitedAdjacentNode(dfsStack.Peek());
 
-                if (nextIndex == -1)
+                if (adjIndex == -1)
                     dfsStack.Pop();
                 else
                 {
-                    currVert = vertices[nextIndex];
-                    currVert.isVisited = true;
-                    // print value
-
+                    currVert = vertices[adjIndex];
+                    currVert.VisitVertex();
+                    dfsStack.Push(adjIndex);
                 }
             }
 
@@ -168,14 +164,27 @@ namespace DotnetcoreDataStructures.Graph
             throw new NotImplementedException();
         }
 
-        public void PrintMatrix()
+        public void PrintAdjMatrix()
         {
-            throw new NotImplementedException();
-        }
+            for (int col = 0; col < this.vertCount; col++)
+            {
+                Vertex<T> currVert = vertices[col];
+                if (currVert != null) Console.Write(currVert.value.ToString() + " "); else Console.Write("- ");
+            }
+            Console.WriteLine("\n");
 
-        public void PrintShortMatrix()
-        {
-            throw new NotImplementedException();
+
+            for (int row = 0; row < this.vertCount; row++)
+            {
+                Vertex<T> currVert = vertices[row];
+                if (currVert != null) Console.Write(currVert.value.ToString() + " "); else Console.Write("- ");
+
+                for (int col = 0; col < this.vertCount; col++)
+                {
+                    Console.Write(adjMatrix[row, col].ToString() + " ");
+                }
+                Console.WriteLine("\n");
+            }
         }
     }
 }

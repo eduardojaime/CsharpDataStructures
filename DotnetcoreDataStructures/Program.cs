@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DotnetcoreDataStructures.Graph;
 
 namespace DotnetcoreDataStructures
 {
@@ -33,9 +34,7 @@ namespace DotnetcoreDataStructures
             BinarySearch(6, arRandomNumbers).ToString();
 
             // Implementing Quick Sort
-            SortArray(arRandomNumbers, 0, arRandomNumbers.Length - 1);
-
-            HeapSort(arRandomNumbers);
+            QuickSort(arRandomNumbers, 0, arRandomNumbers.Length - 1);
 
             Console.WriteLine(System.DateTime.Now.TimeOfDay.ToString());
 
@@ -43,11 +42,29 @@ namespace DotnetcoreDataStructures
 
             HashTableOperations();
 
-            BinarySearchTreeOperations();
+            Graph<string> azGraph = new Graph<string>(10);
+            azGraph.AddVertex("A"); // pos 0
+            azGraph.AddVertex("B"); // pos 1
+            azGraph.AddVertex("C"); // pos 2
+            azGraph.AddVertex("D"); // pos 3
+            azGraph.AddVertex("E"); // pos 4
+            azGraph.AddVertex("F"); // pos 5
+            azGraph.AddVertex("D"); // pos 6
+            azGraph.AddEdge(2, 0); // C to A
+            azGraph.AddEdge(2, 6); // C to A
+            azGraph.AddEdge(0, 1); // A to B
+            azGraph.AddEdge(0, 3); // A to D
+            azGraph.AddEdge(0, 4); // A to E
+            azGraph.AddEdge(3, 1); // D to B
+            azGraph.AddEdge(3, 4); // D to E
+            azGraph.AddEdge(1, 5); // D to E
 
-            BinarySearchTreeBalancedOperations();
-
-            BinaryMinHeapOperations();
+            // azGraph.PrintMatrix();
+            azGraph.PrintAdjMatrix();
+            // azGraph.BottomSort();
+            Console.Write("Depth First Search: ");
+            azGraph.DepthFirstSearch(2); // the starting point of my graph is C in pos 2
+            Console.WriteLine("\n");
 
             Console.ReadKey();
 
@@ -57,11 +74,6 @@ namespace DotnetcoreDataStructures
 
         // https://www.youtube.com/watch?v=wygsfgtpApI
         // https://danielsimionescu.com/#hi-there
-        private static void SortArray(int[] arRandomNumbers, int left, int right)
-        {
-            QuickSort(arRandomNumbers, left, right);
-        }
-
         private static void QuickSort(int[] arRandomNumbers, int left, int right)
         {
             // Create index variables for comparison
@@ -103,26 +115,6 @@ namespace DotnetcoreDataStructures
             // Initial right index greater than new left index > Go to the right side of the array
             if (i < right)
                 QuickSort(arRandomNumbers, i, right);
-        }
-
-        private static void HeapSort(int[] arRandomNumbers)
-        {
-            return;
-        }
-
-        private static void BinaryMinHeapOperations()
-        {
-            return;
-        }
-
-        private static void BinarySearchTreeBalancedOperations()
-        {
-            return;
-        }
-
-        private static void BinarySearchTreeOperations()
-        {
-            return;
         }
 
         // More info on https://www.tutorialspoint.com/csharp/csharp_hashtable.htm

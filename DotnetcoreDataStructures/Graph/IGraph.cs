@@ -23,20 +23,20 @@ namespace DotnetcoreDataStructures.Graph
 
         int GetNextUnvisitedAdjacentNode(int vertexIndex);
 
-        // Sort Methods
-        void TopSort();
-
-        void BottomSort();
-
         // Search Methods
         void DepthFirstSearch(int startVertex);
 
         void BreadthFirstSearch(int startVertex);
 
         // View AdjMatrix
-        void PrintMatrix();
+        void PrintAdjMatrix();
 
-        void PrintShortMatrix();
+
+        // Sort Methods
+        void TopSort();
+
+        void BottomSort();
+
 
     }
 }

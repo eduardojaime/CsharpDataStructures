@@ -14,5 +14,11 @@ namespace DotnetcoreDataStructures.Graph
             this.value = value;
             this.isVisited = false;
         }
+
+        public void VisitVertex()
+        {
+            this.isVisited = true;
+            Console.WriteLine(this.value.ToString());
+        }
     }
 }
