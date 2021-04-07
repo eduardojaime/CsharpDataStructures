@@ -18,6 +18,8 @@ namespace DotnetcoreDataStructures.Graph
         Queue<Vertex<T>> topSortQueue = new Queue<Vertex<T>>();
         Stack<Vertex<T>> bottomSortStack = new Stack<Vertex<T>>();
 
+        Stack<int> dfsStack = new Stack<int>();
+
         public Graph(int numVertices)
         {
             this.numVertices = numVertices;
@@ -36,7 +38,7 @@ namespace DotnetcoreDataStructures.Graph
             // if this is a directed graph then add a two way reference
             // adjMatrix[vertexIndex2, vertexIndex1] = 1;
         }
-        
+
         /// <summary>
         ///  To add a Vertex, add a new element to the array and increment the counter
         /// </summary>
@@ -100,9 +102,17 @@ namespace DotnetcoreDataStructures.Graph
             return -1;
         }
 
+
         public int GetNextUnvisitedAdjacentNode(int vertexIndex)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < vertCount; i++)
+            {
+                if (adjMatrix[vertexIndex, i] == 1 && vertices[i].isVisited == false)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public void TopSort()
@@ -115,9 +125,42 @@ namespace DotnetcoreDataStructures.Graph
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Following a path from the beginning vertex until it reaches the last.
+        /// Then backtracking and following the next path until it reaches the last vertex.
+        /// Until there are no more paths left.
+
+        /// Steps
+        /// 1) Pick starting point, visit and push to stack
+        /// 2) Get next unvisited, visit and push to stack
+        /// 3) Continue until you find last vertex, when there are no more unvisited adjacent vertices
+        /// 4) Pop from stack, and repeat from step 2
+        /// 5) Finish when stack is empty
+        /// </summary>
+        /// <param name="startVertex"></param>
         public void DepthFirstSearch(int startVertex)
         {
-            throw new NotImplementedException();
+            Vertex<T> currVert = vertices[startVertex];
+            currVert.isVisited = true;
+            // print value? maybe make a method called Visit which sets isvisited to true and prints label
+            dfsStack.Push(startVertex);
+
+            int nextIndex;
+            while (dfsStack.Count > 0)
+            {
+                nextIndex = GetNextUnvisitedAdjacentNode(dfsStack.Peek());
+
+                if (nextIndex == -1)
+                    dfsStack.Pop();
+                else
+                {
+                    currVert = vertices[nextIndex];
+                    currVert.isVisited = true;
+                    // print value
+
+                }
+            }
+
         }
 
         public void BreadthFirstSearch(int startVertex)
