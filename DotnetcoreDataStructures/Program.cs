@@ -67,8 +67,6 @@ namespace DotnetcoreDataStructures
             Console.WriteLine("\n");
 
             Console.ReadKey();
-
-
         }
 
 
